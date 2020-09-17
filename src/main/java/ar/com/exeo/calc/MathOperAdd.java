@@ -15,7 +15,7 @@ import ar.com.exeo.calc.service.MathStatistics;
  * @author tonioc
  *
  */
-public class MathOperAdd implements MathOperProcessor {
+public class MathOperAdd extends MathOperProcessor {
 
     private static final Logger log = LoggerFactory.getLogger(MathOperAdd.class);
 

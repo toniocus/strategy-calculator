@@ -13,7 +13,7 @@ import ar.com.exeo.calc.service.MathRepository;
  * @author tonioc
  *
  */
-public class MathOperMultiply implements MathOperProcessor {
+public class MathOperMultiply extends MathOperProcessor {
 
     private static final Logger log = LoggerFactory.getLogger(MathOperMultiply.class);
 
