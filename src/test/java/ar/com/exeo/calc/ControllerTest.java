@@ -27,12 +27,10 @@ public class ControllerTest {
     private final static String DIV_URL = "http://localhost:8080/div/233.0000/4.75";
     private final static String MULT_URL = "http://localhost:8080/mult/31/14";
 
-
-
     @Test
-    public void test() {
+    public void testRestarting() {
 
-        IntStream.range(1, 101).forEach(i -> {
+        IntStream.range(1, 11).forEach(i -> {
 
 
             System.out.println("====================================");
@@ -47,6 +45,28 @@ public class ControllerTest {
 
             reset();
         });
+    }
+
+
+    @Test
+    public void testNoRestarting() {
+
+        init();
+
+        IntStream.range(1, 101).forEach(i -> {
+
+            System.out.println("====================================");
+            System.out.println("TEST: " + i);
+            System.out.println("====================================");
+
+            this.rt.getForEntity(ADD_URL, BigDecimal.class, Collections.emptyMap());
+            this.rt.getForEntity(DIV_URL, BigDecimal.class, Collections.emptyMap());
+            this.rt.getForEntity(MULT_URL, BigDecimal.class, Collections.emptyMap());
+
+
+        });
+
+        reset();
     }
 
 }

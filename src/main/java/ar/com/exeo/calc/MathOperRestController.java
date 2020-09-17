@@ -19,19 +19,17 @@ public class MathOperRestController {
     @Autowired
     ObjectProvider<MathOperProcessor> provider;
 
-    @GetMapping("/add/{x}/{y}")
-    public BigDecimal add(@PathVariable("x") final BigDecimal x, @PathVariable("y") final BigDecimal y) {
-        return this.provider.getObject(MathOperEnum.findByKey("add")).execute(x, y);
-    }
+    @GetMapping("/{operation}/{x}/{y}")
+    public BigDecimal add(
+            @PathVariable("operation") final String operation
+            , @PathVariable("x") final BigDecimal x
+            , @PathVariable("y") final BigDecimal y
+            ) {
 
-    @GetMapping("/mult/{x}/{y}")
-    public BigDecimal multiply(@PathVariable("x") final BigDecimal x, @PathVariable("y") final BigDecimal y) {
-        return this.provider.getObject(MathOperEnum.findByKey("mult")).execute(x, y);
-    }
+        BigDecimal result = this.provider.getObject(MathOperEnum.findByKey(operation)).execute(x, y);
 
-    @GetMapping("/div/{x}/{y}")
-    public BigDecimal divide(@PathVariable("x") final BigDecimal x, @PathVariable("y") final BigDecimal y) {
-        return this.provider.getObject(MathOperEnum.findByKey("div")).execute(x, y);
-    }
+        System.out.format("MathOper: %s x:%s y:%s => %s%n", operation, x, y, result);
 
+        return result;
+    }
 }
