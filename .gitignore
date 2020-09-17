@@ -21,7 +21,4 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
-/.attach_pid16318
-/.attach_pid19649
-/.attach_pid20530
-/.attach_pid21529
+/.attach_pid*

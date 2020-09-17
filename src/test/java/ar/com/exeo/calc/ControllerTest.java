@@ -2,6 +2,7 @@ package ar.com.exeo.calc;
 
 import java.math.BigDecimal;
 import java.util.Collections;
+import java.util.Random;
 import java.util.stream.IntStream;
 
 import org.junit.Ignore;
@@ -66,6 +67,37 @@ public class ControllerTest {
             this.rt.getForEntity(MULT_URL, BigDecimal.class, Collections.emptyMap());
 
 
+        });
+
+        reset();
+    }
+
+
+    @Test
+    public void testRandom() {
+
+        Random random = new Random(System.currentTimeMillis());
+
+        init();
+
+        IntStream.range(1, 101).forEach(i -> {
+
+            System.out.println("====================================");
+            System.out.println("TEST: " + i);
+            System.out.println("====================================");
+
+            switch(random.nextInt(3)) {
+            case 1:
+                this.rt.getForEntity(DIV_URL, BigDecimal.class, Collections.emptyMap());
+                break;
+
+            case 2:
+                this.rt.getForEntity(MULT_URL, BigDecimal.class, Collections.emptyMap());
+                break;
+
+            default:
+                this.rt.getForEntity(ADD_URL, BigDecimal.class, Collections.emptyMap());
+            }
         });
 
         reset();
