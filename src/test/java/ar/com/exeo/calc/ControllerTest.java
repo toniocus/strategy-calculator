@@ -87,11 +87,11 @@ public class ControllerTest {
             System.out.println("====================================");
 
             switch(random.nextInt(3)) {
-            case 1:
+            case 0:
                 this.rt.getForEntity(DIV_URL, BigDecimal.class, Collections.emptyMap());
                 break;
 
-            case 2:
+            case 1:
                 this.rt.getForEntity(MULT_URL, BigDecimal.class, Collections.emptyMap());
                 break;
 
