@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import ar.com.exeo.calc.service.InnerService;
 import ar.com.exeo.calc.service.MathRepository;
 import ar.com.exeo.calc.service.MathStatistics;
 
@@ -16,6 +17,7 @@ public class MathOperAdd implements MathOperProcessor {
 
     private MathRepository repo;
     private MathStatistics stat;
+    private InnerService inner;
 
     @Autowired
     public void setRepo(final MathRepository repo) {
@@ -27,12 +29,18 @@ public class MathOperAdd implements MathOperProcessor {
         this.stat = stat;
     }
 
+    @Autowired
+    public void setInner(final InnerService inner) {
+        this.inner = inner;
+    }
+
     public MathOperAdd(final String user, final long id) {
     }
 
     @Override
     public BigDecimal execute(final BigDecimal n1, final BigDecimal n2) {
 
+        this.inner.doNothing();
         this.repo.registerOperation();
         this.stat.addOperation();
 
