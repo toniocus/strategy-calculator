@@ -1,6 +1,6 @@
 #!/bin/bash
 
-max=${1:="10"}
+max=${1:-"10"}
 counter=0;
 
 while true 
