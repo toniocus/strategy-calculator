@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.stream.IntStream;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.web.client.RestTemplate;
 
@@ -28,6 +29,7 @@ public class ControllerTest {
     private final static String MULT_URL = "http://localhost:8080/mult/31/14";
 
     @Test
+    @Ignore("Just to try if you want, restarting in same JVM is not the way it works in k8s")
     public void testRestarting() {
 
         IntStream.range(1, 11).forEach(i -> {

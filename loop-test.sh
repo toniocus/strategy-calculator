@@ -5,7 +5,12 @@ counter=0;
 
 while true 
 do 
+   echo
+   echo
+   echo
+   echo "========================="
    echo "***** $((++counter)) ****" 
+   echo "========================="
 
    mvn test 
    if [ $? -ne 0 ]
