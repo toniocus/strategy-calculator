@@ -26,10 +26,10 @@ do
    # Kill running docker when ended
    trap "docker kill $dockerId" EXIT
 
-   // copy to container de application
+   # copy application jar to container
    docker cp target/strategy-calculator-0.1.jar $dockerId:/app.jar
 
-   // start de application
+   # start de application
    docker exec -d -it $dockerId java -jar app.jar
 
    echo "Waiting 4\" so container starts up..."

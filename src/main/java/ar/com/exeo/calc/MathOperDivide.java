@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import ar.com.exeo.calc.service.CommonService;
 import ar.com.exeo.calc.service.MathRepository;
 import ar.com.exeo.calc.service.MathStatistics;
 
@@ -21,6 +22,7 @@ public class MathOperDivide extends MathOperProcessor {
 
     private MathRepository repo;
     private MathStatistics stat;
+    private CommonService common;
 
     @Autowired
     public void setRepo(final MathRepository repo) {
@@ -32,6 +34,11 @@ public class MathOperDivide extends MathOperProcessor {
     public void setStat(final MathStatistics stat) {
         log.info("Setting stat: {}", stat);
         this.stat = stat;
+    }
+
+    @Autowired
+    public void setCommon(final CommonService common) {
+        this.common = common;
     }
 
     public MathOperDivide(final String user, final long id) {
