@@ -4,19 +4,15 @@ import java.math.BigDecimal;
 
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 
 /**
  * DOCUMENT .
  * @author tonioc
  *
  */
-@RestController
-public class MathOperRestController {
+@Service
+public class MathOperService {
 
     @Autowired
     MathOperStrategyFactory factory;
@@ -24,22 +20,21 @@ public class MathOperRestController {
     @Autowired
     ObjectProvider<MathOperProcessor> provider;
 
-    @GetMapping("/ok/{operation}/{x}/{y}")
-    public ResponseEntity<BigDecimal> okOperation(
-            @PathVariable("operation") final String operation
-            , @PathVariable("x") final BigDecimal x
-            , @PathVariable("y") final BigDecimal y
+    public BigDecimal okOperation(
+            final MathOperEnum operation
+            , final BigDecimal x
+            , final BigDecimal y
             ) {
 
         try {
 
             BigDecimal result = this.factory
-                    .getStrategy(MathOperEnum.findByKey(operation))
+                    .getStrategy(operation)
                     .execute(x, y);
 
             System.out.format("MathOper: %s x:%s y:%s => %s%n", operation, x, y, result);
 
-            return ResponseEntity.ok(result);
+            return result;
         }
         catch (NullPointerException ex) {
 
@@ -53,26 +48,25 @@ public class MathOperRestController {
                 }
             }
 
-            return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).body(BigDecimal.ONE.negate());
+            return BigDecimal.ONE.negate();
         }
     }
 
 
-    @GetMapping("/buggy/{operation}/{x}/{y}")
-    public ResponseEntity<BigDecimal> buggyOperation(
-            @PathVariable("operation") final String operation
-            , @PathVariable("x") final BigDecimal x
-            , @PathVariable("y") final BigDecimal y
+    public BigDecimal buggyOperation(
+            final MathOperEnum operation
+            , final BigDecimal x
+            , final BigDecimal y
             ) {
 
         try {
             BigDecimal result = this.provider
-                    .getObject(MathOperEnum.findByKey(operation))
+                    .getObject(operation)
                     .execute(x, y);
 
             System.out.format("MathOper: %s x:%s y:%s => %s%n", operation, x, y, result);
 
-            return ResponseEntity.ok(result);
+            return result;
         }
         catch (NullPointerException ex) {
 
@@ -86,7 +80,7 @@ public class MathOperRestController {
                 }
             }
 
-            return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).body(BigDecimal.ONE.negate());
+            return BigDecimal.ONE.negate();
         }
     }
 

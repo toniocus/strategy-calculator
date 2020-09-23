@@ -38,6 +38,7 @@ public class MathOperDivide extends MathOperProcessor {
 
     @Autowired
     public void setCommon(final CommonService common) {
+        log.info("Setting common: {}", this.stat);
         this.common = common;
     }
 
@@ -49,6 +50,7 @@ public class MathOperDivide extends MathOperProcessor {
 
         this.repo.registerOperation();
         this.stat.addOperation();
+        this.common.doNothing();
 
         return n1.divide(n2, RoundingMode.HALF_EVEN);
     }

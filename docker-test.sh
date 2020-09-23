@@ -36,7 +36,9 @@ do
    sleep 4 
 
    echo "Starting tests..."
-   mvn -Dtest=DockerClient test 
+   mvn -Dtest=DockerClient test  &
+   mvn -Dtest=DockerClient test  &
+   mvn -Dtest=DockerClient test  
    if [ $? -ne 0 ]
    then
       echo "***** FALLLLLLLO **********"
