@@ -94,7 +94,7 @@ public class SimpleSpringAppTest {
                     break;
 
                 case 1:
-                    service.okOperation(MathOperEnum.DIVIDE, BigDecimal.TEN, BigDecimal.TEN);
+                    service.okOperation(MathOperEnum.MULTIPLY, BigDecimal.TEN, BigDecimal.TEN);
                     break;
 
                 default:
@@ -131,7 +131,7 @@ public class SimpleSpringAppTest {
                     break;
 
                 case 1:
-                    service.buggyOperation(MathOperEnum.DIVIDE, BigDecimal.TEN, BigDecimal.TEN);
+                    service.buggyOperation(MathOperEnum.MULTIPLY, BigDecimal.TEN, BigDecimal.TEN);
                     break;
 
                 default:
