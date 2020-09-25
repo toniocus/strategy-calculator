@@ -8,4 +8,7 @@ using @Configuration.
 
 You can see 
 [stackoverflow question](https://stackoverflow.com/questions/63998293/spring-not-calling-autowired-setters-in-prototype-beansif) 
-if you are interested in this problem
+if you are interested in this problem.
+
+Use *SimpleSpringAppTest* to play around and see results, at the end you'll see the info
+of the problems found.
