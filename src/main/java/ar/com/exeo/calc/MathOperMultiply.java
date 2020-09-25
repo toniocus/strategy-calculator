@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import ar.com.exeo.calc.service.MathRepository;
+import ar.com.exeo.calc.service.Stat;
 
 /**
  * DOCUMENT .
@@ -15,6 +16,11 @@ import ar.com.exeo.calc.service.MathRepository;
  */
 public class MathOperMultiply extends MathOperProcessor {
 
+    public static final Stat stat = new Stat(MathOperMultiply.class.getSimpleName());
+
+    static {
+        stat.repo = 0;
+    }
     private static final Logger log = LoggerFactory.getLogger(MathOperMultiply.class);
 
     private MathRepository repo;
@@ -23,10 +29,12 @@ public class MathOperMultiply extends MathOperProcessor {
     public void setRepo(final MathRepository repo) {
         log.info("Setting repo: {}", repo);
         this.repo = repo;
+        stat.repo++;
     }
 
 
     public MathOperMultiply(final String user, final long id) {
+        stat.created++;
     }
 
     @Override

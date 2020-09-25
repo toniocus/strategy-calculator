@@ -11,6 +11,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import ar.com.exeo.calc.service.Stat;
+
 /**
  * Testing starting a simple context, no Rest/Web.
  * @author tonioc
@@ -19,32 +21,56 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class SimpleSpringAppTest {
 
     private static MathOperService service;
+    private static ApplicationContext context;
 
     @BeforeClass
     public static void start() throws InterruptedException {
 
-        ApplicationContext context =
-                new AnnotationConfigApplicationContext("ar.com.exeo.calc");
+        context = new AnnotationConfigApplicationContext("ar.com.exeo.calc");
 
         service = context.getBean(MathOperService.class);
 
     }
 
     @Test
-    public void testOk() throws InterruptedException {
-        testRandom(service, true);
+    public void test() throws InterruptedException {
+
+
+        /*
+         *  Creating the beans once before starting, will it affect the result ? (seems it won't)
+         *
+        MathOperStrategyFactory factory = context.getBean(MathOperStrategyFactory.class);
+
+        factory.getStrategy(MathOperEnum.ADD);
+        factory.getStrategy(MathOperEnum.DIVIDE);
+        factory.getStrategy(MathOperEnum.MULTIPLY);
+        */
+
+        // Starting buggy 1st. will make OK fail too
+        // (actually it won't call a single setter in that case).
+
+        String ok = testRandom(service, true);
+        String buggy = testRandom(service, false);
+
+
+        System.out.println("=================================================");
+        System.out.println("Synchronized");
+        System.out.println("=================================================");
+        System.out.println(ok);
+
+        System.out.println("=================================================");
+        System.out.println("Buggy");
+        System.out.println("=================================================");
+        System.out.println(buggy);
+
     }
 
-    @Test
-    public void testBuggy() throws InterruptedException {
-        testRandom(service, false);
-    }
 
     // ===================================================================
     //   ### - Test Random OK
     // ===================================================================
 
-    public void testRandom(final MathOperService service, final boolean ok) throws InterruptedException {
+    public String testRandom(final MathOperService service, final boolean ok) throws InterruptedException {
 
         Random random = new Random(System.currentTimeMillis());
 
@@ -66,9 +92,13 @@ public class SimpleSpringAppTest {
             executorService.shutdown();
             executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);
 
+            String stats = Stat.printAll();
+            Stat.resetAll();
+            return stats;
         }
         catch (Exception ex) {
            System.err.println("Error processing:" + ex.toString());
+           throw ex;
         }
 
     }
