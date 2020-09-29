@@ -21,6 +21,7 @@ public class MathOperAdd extends MathOperProcessor {
     public static final Stat stat = new Stat(MathOperAdd.class.getSimpleName());
 
     static {
+        // put in 0 services needed bythis implementation.
         stat.repo = stat.stat = stat.inner = 0;
     }
 
