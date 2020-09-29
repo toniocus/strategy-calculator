@@ -20,6 +20,14 @@ public class MathOperService {
     @Autowired
     ObjectProvider<MathOperProcessor> provider;
 
+    /**
+     * Ok operation, use {@link MathOperStrategyFactory} to get Strategy implementation.
+     *
+     * @param operation the operation
+     * @param x the x
+     * @param y the y
+     * @return the big decimal
+     */
     public BigDecimal okOperation(
             final MathOperEnum operation
             , final BigDecimal x
@@ -53,6 +61,14 @@ public class MathOperService {
     }
 
 
+    /**
+     * Buggy operation, use ObjectProvider to get the Strategy implementation.
+     *
+     * @param operation the operation
+     * @param x the x
+     * @param y the y
+     * @return the big decimal
+     */
     public BigDecimal buggyOperation(
             final MathOperEnum operation
             , final BigDecimal x

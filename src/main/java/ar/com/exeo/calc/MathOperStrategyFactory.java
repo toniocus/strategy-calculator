@@ -16,6 +16,12 @@ public class MathOperStrategyFactory {
     ObjectProvider<MathOperProcessor> provider;
 
 
+    /**
+     * Gets the strategy, calling ObjectProvider inside a synchronized Method.
+     *
+     * @param operation the operation
+     * @return the strategy
+     */
     public synchronized MathOperProcessor getStrategy(final MathOperEnum operation) {
         return this.provider.getObject(operation);
     }
